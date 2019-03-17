@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Contains simple_oauth_extend.module..
+ */
+
+ /**
+ * Implements hook_ENTITY_TYPE_access().
+ */
+// function simple_oauth_extend_user_role_access(EntityInterface $entity, $operation, AccountInterface $account) {
+//   if ($operation === 'view') {
+//     return AccessResult::allowedIfHasPermission($account, 'view role info');
+//   }
+//   return AccessResult::neutral();
+// }
+
+
+//  /**
+//  * Implements hook_entity_field_access_alter().
+//  */
+// function simple_oauth_extend_entity_field_access_alter(array &$grants, array $context) {
+//   $field = $context['field_definition']->getName();
+//   if ($field == 'roles' && $context['operation'] == 'view') {
+//     $grants[':default'] = AccessResult::allowedIfHasPermission($context['account'], 'view role info');
+//   }
+//  }
