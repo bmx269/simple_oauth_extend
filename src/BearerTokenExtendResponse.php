@@ -18,8 +18,24 @@ class BearerTokenExtendResponse extends BearerTokenResponse {
    */
   protected function getExtraParams(AccessTokenEntityInterface $accessToken)
   {
+    $uid = (int)$accessToken->getUserIdentifier();
+    $user = \Drupal\user\Entity\User::load($uid);
+
+    // Check if user has a photo, if not, use a default one.
+    if (!$user->user_picture->isEmpty()) {
+      $displayImg = \Drupal::service('file_url_generator')->generateAbsoluteString($user->user_picture->entity->getFileUri());
+    }else{
+      $displayImg = 'https://img.icons8.com/external-flaticons-flat-flat-icons/64/undefined/external-user-web-flaticons-flat-flat-icons-2.png';    
+    } 
+
     return [
-        'user_id' => (int)$accessToken->getUserIdentifier(),
+      // Add custom fields to your Bearer Token response here.
+        'user_id' => $uid,
+        'username' => $user->getDisplayName(),
+        'email' => $user->getEmail(),
+        'displayImg' => $displayImg,
+        'lastLoggedIn' => $user->getLastAccessedTime(),
+        
     ];
   }
 }
